@@ -7,3 +7,7 @@ body {
   line-height: 20px;
   margin: 0px;
 }
+
+.bg-indigo {
+  background-color: #4B0082;
+}

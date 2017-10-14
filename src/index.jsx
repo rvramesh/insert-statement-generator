@@ -6,6 +6,10 @@ import { Provider } from 'react-redux';
 import App from '../containers/App';
 import configureStore from '../store/configureStore';
 
+import 'bootstrap/dist/css/bootstrap.css';
+import './main.css';
+
+
 //Needed for React Developer Tools
 window.React = React;
 
