@@ -1,5 +1,4 @@
-import React, { PropTypes, Component } from 'react';
-
+import React, {  Component } from 'react';
 import { Button } from 'reactstrap';
 
 
@@ -8,12 +7,6 @@ const defaultStyle = {
 };
 
 class Header extends Component {
-  handleSave(text) {
-    if (text.length !== 0) {
-      this.props.addTodo(text);
-    }
-  }
-
   render() {
     return (
       <header className="header">
@@ -31,9 +24,5 @@ class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  addTodo: PropTypes.func.isRequired
-};
 
 export default Header;

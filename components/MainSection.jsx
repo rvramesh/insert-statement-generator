@@ -1,5 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters';
+import React, { Component } from 'react';
+import { Row, Col} from 'reactstrap';
+
+import InputTableComponent from "./InputTable"
+import {SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE} from '../constants/TodoFilters';
 
 const TODO_FILTERS = {
   [SHOW_ALL]: () => true,
@@ -10,30 +13,23 @@ const TODO_FILTERS = {
 class MainSection extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { filter: SHOW_ALL };
+    this.state = {
+      filter: SHOW_ALL
+    };
   }
-  
 
   render() {
-   
     return (
-      <section className="main" style={defaultStyle}>
-       
-        {/* {this.renderToggleAll(completedCount)}
-        <List className="todo-list">
-          {filteredTodos.map(todo =>
-            <TodoItem key={todo.id} todo={todo} {...actions} />
-          )}
-        </List>
-        {this.renderFooter(completedCount)} */}
+      <section className="main">
+        
+          <Row>
+            <Col><InputTableComponent/></Col>
+            <Col></Col>
+          </Row>
+        
       </section>
     );
   }
 }
-
-MainSection.propTypes = {
-  todos: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
-};
 
 export default MainSection;
