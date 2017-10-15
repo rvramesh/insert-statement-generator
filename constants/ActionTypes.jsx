@@ -1,6 +1,3 @@
-export const ADD_TODO = 'ADD_TODO';
-export const DELETE_TODO = 'DELETE_TODO';
-export const EDIT_TODO = 'EDIT_TODO';
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const COMPLETE_ALL = 'COMPLETE_ALL';
-export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
+export const COLUMN_CHANGE = 'MODIFY_COLUMN';
+export const TABLE_CHANGED = 'TABLE_CHANGE';
+export const DATA_CHANGED = 'MODIFY_DATA';

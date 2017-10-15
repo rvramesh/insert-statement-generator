@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import todos from './todos';
+import insertStatementGenerator from './insertStatementGenerator';
 
 const rootReducer = combineReducers({
-    todos
+    insertStatementGenerator
 });
 
 export default rootReducer;

@@ -2,21 +2,21 @@ import React, { Component } from "react";
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
-import * as TodoActions from '../actions/todos';
+import * as ChangeDataActions from '../actions/changeActions';
 
 
 class App extends Component {
+  
   render() {
-    const { todos, actions } = this.props;
+    const { insertStatementState, actions } = this.props;
     return (
-      <div>
           <div>
-            <Header addTodo={actions.addTodo}/>
-            <MainSection todos={todos} actions={actions}/>
+            <Header modifyTable={actions.changeTable}/>
+            <MainSection insertStatementState={insertStatementState} actions={actions}/>
           </div>
-      </div>
     );
   }
 }
@@ -24,13 +24,13 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    todos: state.todos
+    insertStatementState: state.insertStatementGenerator
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(TodoActions, dispatch)
+    actions: bindActionCreators(ChangeDataActions, dispatch)
   };
 }
 
