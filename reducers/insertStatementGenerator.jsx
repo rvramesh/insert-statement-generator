@@ -31,8 +31,12 @@ initialState.insertStatements = generateInsertStatement(initialState.tableName, 
 function computeInsertStatement(tableName, columnNames, values) {
   let val = [];
   for (let value of values) {
-    if (value == null) {
+    if (value === null) {
       break;
+    }
+    else if(value === "NULL" || value==="null") {
+      val.push("NULL");
+      continue;
     }
     const sanitisedValue = value.replace(/[\0\x08\x09\x1a\n\r"'_&\\\%]/g, function (char) {
       switch (char) {
@@ -92,23 +96,33 @@ export default function insertStatementGenerator(state = initialState, action) {
   debugger;
   switch (action.type) {
     case COLUMN_CHANGE:
-      let columnNames = changeArrayItem(initialState.columnNames, action.columnName, action.col);
-      return Object.assign({}, initialState, {
+      let columnNames = changeArrayItem(state.columnNames, action.columnName, action.col);
+      return Object.assign({}, state, {
         columnNames: columnNames,
-        insertStatements: generateInsertStatement(initialState.tableName, columnNames, initialState.data)
+        insertStatements: generateInsertStatement(state.tableName, columnNames, state.data)
       });
 
     case TABLE_CHANGED:
-      return Object.assign({}, initialState, {
+      return Object.assign({}, state, {
         tableName: action.tableName,
-        insertStatements: generateInsertStatement(action.tableName, initialState.columnNames, initialState.data)
+        insertStatements: generateInsertStatement(action.tableName, state.columnNames, state.data)
       });
 
     case DATA_CHANGED:
-      let data = changeArrayItem(initialState.data, action.data, action.row);
-      return Object.assign({}, initialState, {
+      let data = state.data;
+      let insertStatements = state.insertStatements;
+      for(let changes of action.dataChanges)
+      {
+          data=changeArrayItem(data, changes.data,changes.rpw );
+
+          insertStatements = changeArrayItem(insertStatements, 
+            computeInsertStatement(state.tableName, 
+              state.columnNames, changes.data), changes.row);
+      }
+       
+      return Object.assign({}, state, {
         data: data,
-        insertStatements: changeArrayItem(initialState.insertStatements, computeInsertStatement(initialState.tableName, initialState.columnNames, action.data), action.row)
+        insertStatements: insertStatements
       });
 
     default:

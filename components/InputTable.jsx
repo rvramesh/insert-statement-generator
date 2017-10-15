@@ -52,18 +52,27 @@ class InputTableComponent extends Component {
           rowHeaderWidth: 115,
           onAfterChange: function(changes, source) {
             const getSourceDataAtRow = this.getSourceDataAtRow;
+            let changedRows = [];
+            let processedRows = {};
+            let headerProcessed = false;
             if (source !== 'loadData') {
               changes.forEach((change) => {
                 //change [row, col, oldVal, newVal]
-                debugger;
-                if(change[0] === 0){
+                
+                if(change[0] === 0 && headerProcessed===false){
                   //column change
                   that.changeColumn( change[1],change[3]);
+                  headerProcessed=true;
                 }
-                else if (change[2] !== change[3]) {
-                  that.changeData(change[0]-1, getSourceDataAtRow(change[0]));
+                else if (change[2] !== change[3] && !processedRows["id"+(change[0]-1)]) {
+                  changedRows.push({ row:change[0]-1, data:getSourceDataAtRow(change[0])});
+                  processedRows["id"+(change[0]-1)] = true;
                 }
               });
+              for(let changeData of changedRows)
+              {
+                that.changeData(changedRows);
+              }
             }
           }
         }}/>

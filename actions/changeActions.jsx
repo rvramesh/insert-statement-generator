@@ -1,7 +1,7 @@
 import * as types from '../constants/ActionTypes';
 
-export function changeData(row, data) {
-  return { type: types.DATA_CHANGED, row, data };
+export function changeData(dataChanges) {
+  return { type: types.DATA_CHANGED, dataChanges };
 }
 
 export function changeTable(text) {
