@@ -7,7 +7,7 @@ import App from '../containers/App';
 import configureStore from '../store/configureStore';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import './main.css';
+import './index.css';
 
 
 //Needed for React Developer Tools
